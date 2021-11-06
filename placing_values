@@ -1,0 +1,96 @@
+-- Adding departments 
+insert into
+	departments(department_name)
+values 
+	('Earth'),
+	('Water'),
+	('Air'),
+	('Fire'),
+	('Benco');
+
+--Adding employees	
+insert into 
+	employees(employee_name, employee_email, employee_password, is_benco, department_id)
+values
+	--Earth Department is regular has all roles
+	('Adele', 'adele@j.com', 'adele', false, 1),
+	('Brad', 'brad@j.com', 'brad', false, 1),
+	('Chad', 'chad@j.com', 'chad', false, 1),
+	('Don', 'don@j.com', 'don', false, 1), -- supervisor
+	('Elijah', 'elijah@j.com', 'elijah', false, 1), -- department head 
+	-- Water does not have a supervisor
+	('Falcor', 'falcor@j.com', 'flacor', false, 2),
+	('Geeta', 'geeta@j.com', 'geeta', false, 2),
+	('Hilton', 'hilton@j.com', 'hilton', false, 2), -- department head 
+	--Air does not have have a department head
+	('Ian', 'ian@j.com', 'ian', false, 3),
+	('Jessica', 'jessica@j.com', 'jessica', false, 3),
+	('Kora', 'kora@j.com', 'kora', false, 3), --supervisor
+	--Fire does not have a supervisor or a department head
+	('Lauren', 'lauren@j.com', 'lauren', false, 4),
+	('Mona', 'mona@j.com', 'mona', false, 4),
+	--Benco
+	('Big Poppa', 'bigpoppa@j.com', 'bigpoppa', true, 5); -- benco
+	
+-- Adding department head
+insert into
+	department_heads(department_id, head_id)
+values 
+	(1,5),
+	(2,8);
+	
+-- Adding Supervisors
+insert into
+	supervisors(employee_id, supervisor_id)
+values 
+	(1,4),
+	(2,4),
+	(3,4),
+	(9,11),
+	(10,11);
+
+-- Adding event_types 
+insert into
+	event_types(type_name,type_percentage)
+values 
+	('University Courses',80),
+	('Seminars',60),
+	('Certification Preparation Classes',75),
+	('Certification',100),
+	('Technical Training',90),
+	('Other',30);
+
+--Adding grade_formats
+insert into
+	grade_formats(grade_type, grade_cutoff)
+values 
+	('Pass or Fail', 'Pass'),
+	('Letter Grade', 'A'),
+	('Letter Grade', 'B'),
+	('Letter Grade', 'C'),
+	('Letter Grade', 'D'),
+	('Letter Grade', 'F'),
+	('Presentation', '');
+
+--Adding Statuses
+insert into
+	statuses(status_msg)
+values 
+	('Recently Added'),
+	('Approved by the Supervisor'),
+	('Approved by the Department Head'),
+	('Approved by the Benefits Coordinator, Awaiting Grades/Presentation'),
+	('Awaiting Final Approval from the Benefits Coordinator'),
+	('Grades Approved, Reimbursment Approved'),
+	('Presentation Valid, Reimbursment Approved'),
+	('Additional information requested by the Supervisor from the Employee'),
+	('Additional information requested by the Department Head from the Employee'),
+	('Additional information requested by the Department Head from the Supervisor'),
+	('Additional information requested by the Benefits Coordinator from the Employee'),
+	('Additional information requested by the Benefits Coordinator from the Supervisor'),
+	('Additional information requested by the Benefits Coordinator from the Department Head'),
+	('Rejected');
+	
+	
+	
+

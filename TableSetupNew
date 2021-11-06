@@ -1,0 +1,78 @@
+drop table if exists files;
+drop table if exists events;
+drop table if exists statuses;
+drop table if exists grade_formats;
+drop table if exists event_types;
+drop table if exists supervisors; 
+drop table if exists department_heads; 
+drop table if exists employees; 
+drop table if exists departments; 
+
+create table departments(
+	department_id Serial Primary Key,
+	department_name varchar(100)
+);
+
+create table employees(
+	employee_id serial primary key,
+	employee_name varchar(100) not null,
+	employee_email varchar(75) unique not null,
+	employee_password varchar(50) not null,
+	is_benco bool default false,
+	department_id int references departments(department_id)
+);
+
+create table department_heads(
+	department_id int primary key,
+	head_id int
+);
+
+
+create table supervisors(
+	employee_id int primary key,
+	supervisor_id int
+);
+
+create table event_types(
+	type_id serial primary key,
+	type_name varchar(100),
+	type_percentage numeric(5,2)
+);
+
+create table grade_formats(
+	grade_id serial primary key,
+	grade_type varchar(50),
+	grade_cutoff varchar(50)
+);
+
+create table statuses(
+	status_id serial primary key,
+	status_msg varchar(100)
+);
+
+
+create table events(
+	event_id serial primary key,
+	employee_id int references employees(employee_id),
+	employee_name varchar(100) not null,
+	event_date bigint not null,
+	event_location varchar(50) not null,
+	event_description text ,
+	event_cost numeric (8,2) not null,
+	event_type_id int references event_types(type_id),
+	event_justification text,
+	grade_format_id int references grade_formats(grade_id),
+	event_grade varchar(50),
+	event_curr_status_id int references statuses(status_id),
+	event_last_status_id int references statuses(status_id),
+	admin_msg text,
+	event_submission_date bigint not null
+);
+
+create table files(
+	file_id serial primary key,
+	event_id int references events(event_id),
+	requested_from_id int references employees(employee_id),
+	filename varchar(255),
+	file bytea
+);

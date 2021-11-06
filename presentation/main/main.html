@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Reimbursment Home</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    </head>
+    <body>
+        <button class="btn btn-danger btn-lg float-right" style = "position:absolute; top:0; right:0;" id="logoutBtn">Logout</button>
+        <div class="container-fluid">
+            <h2 class="h2 center">Welcome to the Reimbursment Page</h2>
+
+            <table class="table table-striped" id="reimbursmentTable">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Employee Name</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Event Type</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Review</th>
+                    </tr>
+                </thead>
+                <tbody >
+
+                </tbody>
+            </table>
+
+            <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#formModal">Reimbursment Submission</button>
+
+            <button type="button" class="btn btn-info btn-lg" onclick="getAllEvents()"> Testing atStart</button>
+        </div>
+
+        <!-- Reimbursment Form Modal -->
+        <div class="modal fade" id="formModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+
+                <!-- Modal Content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Reimbursment Form</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Reimbursment Form -->
+                        <div class="mb-3">
+                            <label for="nameInput" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="nameInput" placeholder="Full Name" required minlength="1">
+                        </div>
+                        <div class="mb-3">
+                            <label for="eventDateInput" class="form-label">Event Date</label>
+                            <input type="date" class="form-control" id="eventDateInput" placeholder="Full Name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="locationInput" class="form-label">Event Location</label>
+                            <input type="text" class="form-control" id="locationInput" placeholder="Location">
+                        </div>
+                        <div class="mb-3">
+                            <label for="desciptionInput" class="form-label">Event Description</label>
+                            <textarea class="form-control" id="descriptionInput" rows="2"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="costInput" class="form-label">Cost of The Event</label>
+                            <input type="number" class="form-control" id="costInput">
+                        </div>
+                        <!-- This is going to be the dropdown -->
+                        <!--Enter in the fields that are necessary-->
+                        <div class="mb-3">
+                            <label for="eventTypeInput">Choose a Event Type</label>
+                            <select name="eventTypeInput" id="eventTypeInput" class="form-select">
+                                <option value="1">University Courses</option>
+                                <option value="2">Seminars</option>
+                                <option value="3">Certification Preparation Classes</option>
+                                <option value="4">Certification</option>
+                                <option value="5">Technical Training</option>
+                                <option value="6" selected>Other</option>
+                            </select>
+                        </div>
+                       
+
+                        
+                        <div class="mb-3">
+                            <label for="gradeFormatInput">Select Grading Format </label>
+                            <select name="gradeFormatInput" id="gradeFormatInput" class="form-select">
+                                <option value="1" selected>pass/fail</option>
+                                <option value="2">Letter Grade</option>
+                                <option value="7">Presentation</option>
+                            </select>
+                            <label for="letterGradeInput">Select the Cut Off Grade </label>
+                            <select name="letterGradeInput" id="letterGradeInput" class="form-select" hidden="true">
+                                <option value="2">A</option>
+                                <option value="3">B</option>
+                                <option value="4" selected>C</option>
+                                <option value="5">D</option>
+                                <option value="6">F</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="justificationInput" class="form-label">Event Justification</label>
+                            <textarea class="form-control" id="justificationInput" rows="2"></textarea>
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-success" id="formSubmit">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Administrative Modal-->
+        <div class = "modal fade" id="adminModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered"> 
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"> Review Reimbursment</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                            <div >
+                                <p id="adminField1"> </p>
+                                <p id="adminField2"> </p>
+                                <p id="adminField3"> </p>
+                                <p id="adminField4"> </p>
+                                <p id="adminField5"> </p>
+                                <p id="adminField6"> </p>
+                                <p id="adminField7"> </p>
+                                <p id="finalGradeField"> </p>
+                                <p id="adminField8"> </p>
+                            </div>
+                            <div class="mb-3" id="adminMsgDiv">
+                                <label for="adminMsgInput" class="form-label"> </label>
+                                <textarea class="form-control" id="adminMsgInput" rows="2"></textarea>
+                            </div>
+                            <div id="manipulationDiv"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" id="adminReject"> </button>
+                        <button type="button" class="btn btn-secondary" id="adminRequested"> </button>
+                        <button type="button" class="btn btn-success" id="adminApprove"> </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        
+    </body>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <script src="main.js"></script>
+</html>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+
+        <property name="hibernate.connection.driver_class">
+            org.postgresql.Driver
+        </property>
+
+        <property name="hibernate.dialect">
+            org.hibernate.dialect.PostgreSQL10Dialect
+        </property>
+
+        <property name="hibernate.connection.url">
+            jdbc:postgresql://database-postgres.cvx41ewiybmn.us-west-1.rds.amazonaws.com/postgres
+        </property>
+
+        <property name="hibernate.connection.username">
+            sabby
+        </property>
+
+        <property name="hibernate.connection.password">
+            TestingPurposes
+        </property>
+
+        <!-- Optional Properties -->
+        <property name="show_sql">
+            true
+        </property>
+
+        <property name="hbm2ddl.auto">
+            validate
+        </property>
+
+
+        <!-- Class Mappings -->
+        <mapping class="com.trms.models.Department" />
+        <mapping class="com.trms.models.DepartmentHead" />
+        <mapping class="com.trms.models.Employee" />
+        <mapping class="com.trms.models.Event" />
+        <mapping class="com.trms.models.EventType" />
+<!--        <mapping class="com.trms.models.File" />-->
+        <mapping class="com.trms.models.GradeFormat" />
+        <mapping class="com.trms.models.Status" />
+        <mapping class="com.trms.models.Supervisor" />
+
+    </session-factory>
+</hibernate-configuration>
